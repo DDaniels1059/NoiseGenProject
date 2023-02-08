@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Ground.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/healthpickup.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Hover.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/plank.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkDown.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkLeft.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkRight.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkUp.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Stone.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/timerFont.spritefont</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
