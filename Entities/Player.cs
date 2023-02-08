@@ -3,11 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NoiseGenProject.Helpers;
 
 namespace NoiseGenProject
@@ -107,12 +102,19 @@ namespace NoiseGenProject
             else
                 anim.setFrame(1);
 
-
-
+            if (PlayerCollisionBox.Intersects(GameData.TLeftCell))
+                GameData.Curr_Cell = GameData.TLEFT_CELL;
+            else if (PlayerCollisionBox.Intersects(GameData.TRightCell))
+                GameData.Curr_Cell = GameData.TRIGHT_CELL;
+            else if (PlayerCollisionBox.Intersects(GameData.BLeftCell))
+                GameData.Curr_Cell = GameData.BLEFT_CELL;
+            else if (PlayerCollisionBox.Intersects(GameData.BRightCell))
+                GameData.Curr_Cell = GameData.BRIGHT_CELL;
 
             playerCollisionBox = new Rectangle((int)position.X - 8, (int)position.Y + 4, 16, 16);
             kStateOld = kState;
         }
+
 
         public void Draw(SpriteBatch _spriteBatch, Texture2D rectangleTexture, float depth)
         {

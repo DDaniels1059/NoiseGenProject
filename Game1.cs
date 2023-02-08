@@ -7,6 +7,7 @@ using System;
 using NoiseGenProject.Blocks;
 using NoiseGenProject.Helpers;
 using NoiseGenProject.Items;
+using System.Collections.Generic;
 
 namespace NoiseGenProject
 {
@@ -26,6 +27,7 @@ namespace NoiseGenProject
         private float hoverDistance;
         private Rectangle drawBounds;
         private Rectangle collisionBounds;
+
 
 
         SpriteFont timerFont;
@@ -92,6 +94,8 @@ namespace NoiseGenProject
                 player.Update(gameTime, Content);
                 var playerPos = player.Position;
 
+
+
                 float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 drawBounds = new Rectangle((int)player.Position.X - 400, (int)player.Position.Y - 400, 800, 800);
@@ -140,7 +144,26 @@ namespace NoiseGenProject
                             // Remove the Block from the map and the collider from the list
                             block.DropItem(itemPosition, Content);
                             GameData.map[x, y] = new GrassBlock(Content);
-                            GameData.collisionObjects.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+
+                            if (blockRect.Intersects(GameData.TLeftCell))
+                            {
+                                GameData.TLeftCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+                            }
+                            else if (blockRect.Intersects(GameData.TRightCell))
+                            {
+                                GameData.TRightCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+
+                            }
+                            else if (blockRect.Intersects(GameData.BLeftCell))
+                            {
+                                GameData.BLeftCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+
+                            }
+                            else if (blockRect.Intersects(GameData.BRightCell))
+                            {
+                                GameData.BRightCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+
+                            }
                         }
                         else
                         {
@@ -148,7 +171,6 @@ namespace NoiseGenProject
                         }
                     }
                 }
-
 
 
                 if (kState.IsKeyDown(Keys.D1) && kStateOld.IsKeyUp(Keys.D1))
@@ -161,14 +183,94 @@ namespace NoiseGenProject
                     this.camera.Zoom -= 0.5f;
                 }
 
-                foreach (var rect in GameData.collisionObjects)
+
+                if (GameData.Curr_Cell != 0)
                 {
-                    if (rect.Intersects(player.PlayerCollisionBox) && collisionBounds.Contains(rect))
+                    List<Rectangle> cellCollisions = null;
+                    switch (GameData.Curr_Cell)
                     {
-                        player.Position = initpos;
-                        player.anim.setFrame(1);
+                        case GameData.TLEFT_CELL:
+                            cellCollisions = GameData.TLeftCellColl;
+                            break;
+                        case GameData.TRIGHT_CELL:
+                            cellCollisions = GameData.TRightCellColl;
+                            break;
+                        case GameData.BLEFT_CELL:
+                            cellCollisions = GameData.BLeftCellColl;
+                            break;
+                        case GameData.BRIGHT_CELL:
+                            cellCollisions = GameData.BRightCellColl;
+                            break;
+                    }
+
+                    if (cellCollisions != null)
+                    {
+                        foreach (var rect in cellCollisions)
+                        {
+                            if (rect.Intersects(player.PlayerCollisionBox) && collisionBounds.Contains(rect))
+                            {
+                                player.Position = initpos;
+                                player.anim.setFrame(1);
+                                break;
+                            }
+                        }
                     }
                 }
+
+
+                //if (player.PlayerCollisionBox.Intersects(GameData.TLeftCell))
+                //{
+                //    foreach (var rect in GameData.TLeftCellColl)
+                //    {
+                //        if (rect.Intersects(player.PlayerCollisionBox) && collisionBounds.Contains(rect))
+                //        {
+                //            player.Position = initpos;
+                //            player.anim.setFrame(1);
+                //        }
+                //    }
+                //}
+                //else if (player.PlayerCollisionBox.Intersects(GameData.TRightCell))
+                //{
+                //    foreach (var rect in GameData.TRightCellColl)
+                //    {
+                //        if (rect.Intersects(player.PlayerCollisionBox) && collisionBounds.Contains(rect))
+                //        {
+                //            player.Position = initpos;
+                //            player.anim.setFrame(1);
+                //        }
+                //    }
+                //}
+                //else if (player.PlayerCollisionBox.Intersects(GameData.BLeftCell))
+                //{
+                //    foreach (var rect in GameData.BLeftCellColl)
+                //    {
+                //        if (rect.Intersects(player.PlayerCollisionBox) && collisionBounds.Contains(rect))
+                //        {
+                //            player.Position = initpos;
+                //            player.anim.setFrame(1);
+                //        }
+                //    }
+                //}
+                //else if (player.PlayerCollisionBox.Intersects(GameData.BRightCell))
+                //{
+                //    foreach (var rect in GameData.BRightCellColl)
+                //    {
+                //        if (rect.Intersects(player.PlayerCollisionBox) && collisionBounds.Contains(rect))
+                //        {
+                //            player.Position = initpos;
+                //            player.anim.setFrame(1);
+                //        }
+                //    }
+                //}
+
+                //foreach (var rect in GameData.collisionObjects)
+                //{
+                //    if (rect.Intersects(player.PlayerCollisionBox) && collisionBounds.Contains(rect))
+                //    {
+                //        player.Position = initpos;
+                //        player.anim.setFrame(1);
+                //    }
+                //}
 
                 foreach (Item items in GameData.items)
                 {
@@ -192,10 +294,10 @@ namespace NoiseGenProject
 
             _spriteBatch.Begin(this.camera, SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState: SamplerState.PointClamp);
 
-            int xStart = MathHelper.Max(0, (drawBounds.X) / GameData.TileSize);
-            int xEnd = MathHelper.Min(GameData.MapSize, (drawBounds.Right) / GameData.TileSize + 1);
-            int yStart = MathHelper.Max(0, (drawBounds.Y) / GameData.TileSize);
-            int yEnd = MathHelper.Min(GameData.MapSize, (drawBounds.Bottom) / GameData.TileSize + 1);
+            //int xStart = MathHelper.Max(0, (drawBounds.X) / GameData.TileSize);
+            //int xEnd = MathHelper.Min(GameData.MapSize, (drawBounds.Right) / GameData.TileSize + 1);
+            //int yStart = MathHelper.Max(0, (drawBounds.Y) / GameData.TileSize);
+            //int yEnd = MathHelper.Min(GameData.MapSize, (drawBounds.Bottom) / GameData.TileSize + 1);
 
 
             Vector2 playerOrigin = new Vector2(player.Position.X - 16, player.Position.Y - 1);
@@ -217,8 +319,13 @@ namespace NoiseGenProject
                 }
             }
 
-            _spriteBatch.Draw(hoverTexture, drawBounds, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
-            _spriteBatch.Draw(hoverTexture, collisionBounds, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
+            //_spriteBatch.Draw(hoverTexture, drawBounds, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
+            //_spriteBatch.Draw(hoverTexture, collisionBounds, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
+
+            //_spriteBatch.Draw(hoverTexture, GameData.TLeftCell, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
+            //_spriteBatch.Draw(hoverTexture, GameData.TRightCell, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
+            //_spriteBatch.Draw(hoverTexture, GameData.BRightCell, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
+            //_spriteBatch.Draw(hoverTexture, GameData.BLeftCell, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
 
 
             foreach (Item items in GameData.items)

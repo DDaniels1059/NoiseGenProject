@@ -1,7 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Ground.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/Ground.xnb","TextureProcessor","Texture2DContent",3504,4181,0.0840719
 "C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/healthpickup.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/healthpickup.xnb","TextureProcessor","Texture2DContent",435,4181,0.08271
-"C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Hover.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/Hover.xnb","TextureProcessor","Texture2DContent",142,4181,0.0816171
+"C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Hover.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/Hover.xnb","TextureProcessor","Texture2DContent",127,4181,0.0806693
 "C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/plank.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/plank.xnb","TextureProcessor","Texture2DContent",354,36949,0.0875342
 "C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkDown.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/Player/walkDown.xnb","TextureProcessor","Texture2DContent",2340,16469,0.0824186
 "C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkLeft.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/Player/walkLeft.xnb","TextureProcessor","Texture2DContent",2462,16469,0.0804289

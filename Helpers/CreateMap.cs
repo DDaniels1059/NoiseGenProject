@@ -45,7 +45,24 @@ namespace NoiseGenProject.Helpers
                     {
                         GameData.map[x, y] = new StoneBlock(Content);
                         Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
-                        GameData.collisionObjects.Add(rect);
+
+                        if (rect.Intersects(GameData.TLeftCell))
+                        {
+                            GameData.TLeftCellColl.Add(rect);
+                        }
+                        else if (rect.Intersects(GameData.TRightCell))
+                        {
+                            GameData.TRightCellColl.Add(rect);
+                        }
+                        else if (rect.Intersects(GameData.BLeftCell))
+                        {
+                            GameData.BLeftCellColl.Add(rect);
+                        }
+                        else if (rect.Intersects(GameData.BRightCell))
+                        {
+                            GameData.BRightCellColl.Add(rect);
+                        }
+
                     }
                     else
                     {
