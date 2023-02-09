@@ -12,16 +12,16 @@ using System.Threading.Tasks;
 
 namespace NoiseGenProject.Blocks
 {
-    internal class StoneBlock : Block
+    internal class CoalBlock : Block
     {
         private static Texture2D texture;
         private static bool isTextureLoaded = false;
 
-        public StoneBlock(ContentManager content)
+        public CoalBlock(ContentManager content)
         {
             if (!isTextureLoaded)
             {
-                texture = content.Load<Texture2D>("Stone");
+                texture = content.Load<Texture2D>("Coal");
                 isTextureLoaded = true;
             }
             isMinable = true;
@@ -36,7 +36,7 @@ namespace NoiseGenProject.Blocks
         {
             GameData.items.Add(new Health(itemPosition, Content));
 
-            Debug.WriteLine("Dropped Stone Item");
+            Debug.WriteLine("Dropped Coal Item");
         }
     }
 }

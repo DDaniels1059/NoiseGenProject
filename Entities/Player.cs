@@ -76,11 +76,11 @@ namespace NoiseGenProject
                 switch (direction)
                 {
                     case Dir.Right:
-                        if (position.X < 850 * 32)
+                        if (position.X < GameData.MapSize * GameData.TileSize)
                             position.X += speed * dt;
                         break;
                     case Dir.Left:
-                        if (position.X > 0)
+                        if (position.X > 10)
                             position.X -= speed * dt;
                         break;
                     case Dir.Up:
@@ -88,7 +88,7 @@ namespace NoiseGenProject
                             position.Y -= speed * dt;
                         break;
                     case Dir.Down:
-                        if (position.Y < 850 * 32)
+                        if (position.Y < GameData.MapSize * GameData.TileSize)
                             position.Y += speed * dt;
                         break;
                 }

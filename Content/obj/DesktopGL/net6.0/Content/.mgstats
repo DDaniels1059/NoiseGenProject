@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Coal.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/Coal.xnb","TextureProcessor","Texture2DContent",296,4181,0.084379
 "C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Ground.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/Ground.xnb","TextureProcessor","Texture2DContent",3504,4181,0.0840719
 "C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/healthpickup.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/healthpickup.xnb","TextureProcessor","Texture2DContent",435,4181,0.08271
 "C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Hover.png","C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Content/Hover.xnb","TextureProcessor","Texture2DContent",127,4181,0.0806693

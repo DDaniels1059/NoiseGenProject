@@ -35,3 +35,4 @@ C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Play
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\timerFont.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Hover.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\healthpickup.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Coal.xnb

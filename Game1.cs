@@ -29,7 +29,6 @@ namespace NoiseGenProject
         private Rectangle collisionBounds;
 
 
-
         SpriteFont timerFont;
         Color baseColor;
         Vector2 mouseHoverPos;
@@ -113,7 +112,7 @@ namespace NoiseGenProject
 
 
 
-                if (mState.RightButton == ButtonState.Pressed && mStateOld.RightButton == ButtonState.Released && hoverDistance < 50)
+                if (mState.LeftButton == ButtonState.Pressed && mStateOld.LeftButton == ButtonState.Released && hoverDistance < 50)
                 {
                     // Get the mouse position
                     Vector2 mousePos = help.GetMousePos(mState, camera);
@@ -139,36 +138,37 @@ namespace NoiseGenProject
                             itemPosition = new Vector2((x * GameData.TileSize + 16) - offset, (y * GameData.TileSize + 16) - offset);
                         }
 
-                        if (blockRect.Contains((int)mousePos.X, (int)mousePos.Y) && block.isMinable)
+                        if(block != null)
                         {
-                            // Remove the Block from the map and the collider from the list
-                            block.DropItem(itemPosition, Content);
-                            GameData.map[x, y] = new GrassBlock(Content);
-
-                            if (blockRect.Intersects(GameData.TLeftCell))
+                            if (blockRect.Contains((int)mousePos.X, (int)mousePos.Y) && block.isMinable)
                             {
-                                GameData.TLeftCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
-                            }
-                            else if (blockRect.Intersects(GameData.TRightCell))
-                            {
-                                GameData.TRightCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+                                // Remove the Block from the map and the collider from the list
+                                block.DropItem(itemPosition, Content);
+                                GameData.map[x, y] = null;
 
-                            }
-                            else if (blockRect.Intersects(GameData.BLeftCell))
-                            {
-                                GameData.BLeftCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
 
+                                if (blockRect.Intersects(GameData.TLeftCell))
+                                {
+                                    GameData.TLeftCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+                                }
+                                else if (blockRect.Intersects(GameData.TRightCell))
+                                {
+                                    GameData.TRightCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+                                }
+                                else if (blockRect.Intersects(GameData.BLeftCell))
+                                {
+                                    GameData.BLeftCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+                                }
+                                else if (blockRect.Intersects(GameData.BRightCell))
+                                {
+                                    GameData.BRightCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
+                                }
                             }
-                            else if (blockRect.Intersects(GameData.BRightCell))
+                            else
                             {
-                                GameData.BRightCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
-
+                                Debug.WriteLine("Not A Mineable or Valid Block");
                             }
-                        }
-                        else
-                        {
-                            Debug.WriteLine("Not A Mineable or Valid Block");
-                        }
+                        }                        
                     }
                 }
 
@@ -292,26 +292,22 @@ namespace NoiseGenProject
         {
             GraphicsDevice.Clear(baseColor);
 
+            #region DYNAMIC DISPLAY
+
             _spriteBatch.Begin(this.camera, SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState: SamplerState.PointClamp);
-
-            //int xStart = MathHelper.Max(0, (drawBounds.X) / GameData.TileSize);
-            //int xEnd = MathHelper.Min(GameData.MapSize, (drawBounds.Right) / GameData.TileSize + 1);
-            //int yStart = MathHelper.Max(0, (drawBounds.Y) / GameData.TileSize);
-            //int yEnd = MathHelper.Min(GameData.MapSize, (drawBounds.Bottom) / GameData.TileSize + 1);
-
 
             Vector2 playerOrigin = new Vector2(player.Position.X - 16, player.Position.Y - 1);
             player.Draw(_spriteBatch, rectangleTexture, help.GetDepth(playerOrigin, _graphics));
             createMap.Draw(_spriteBatch, drawBounds);
 
             Point mouseTile = new Point((int)(mouseHoverPos.X / GameData.TileSize), (int)(mouseHoverPos.Y / GameData.TileSize));
-            if (hoverDistance <= 40)
+            if (hoverDistance <= 50)
             {
                 if (mouseTile.X >= 0 && mouseTile.X < GameData.MapSize && mouseTile.Y >= 0 && mouseTile.Y < GameData.MapSize)
                 {
                     Block block = GameData.map[mouseTile.X, mouseTile.Y];
 
-                    if (block != null && block is StoneBlock)
+                    if (block != null && block.isMinable)
                     {
                         Rectangle blockRect = new Rectangle(mouseTile.X * GameData.TileSize, mouseTile.Y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
                         _spriteBatch.Draw(hoverTexture, blockRect, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.1f);
@@ -319,23 +315,22 @@ namespace NoiseGenProject
                 }
             }
 
-            //_spriteBatch.Draw(hoverTexture, drawBounds, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
-            //_spriteBatch.Draw(hoverTexture, collisionBounds, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
+            foreach (Item items in GameData.items)
+            {
+                items.Draw(_spriteBatch, drawBounds, _graphics);
+            }
+
+            _spriteBatch.Draw(hoverTexture, drawBounds, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(hoverTexture, collisionBounds, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
 
             //_spriteBatch.Draw(hoverTexture, GameData.TLeftCell, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
             //_spriteBatch.Draw(hoverTexture, GameData.TRightCell, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
             //_spriteBatch.Draw(hoverTexture, GameData.BRightCell, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
             //_spriteBatch.Draw(hoverTexture, GameData.BLeftCell, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1f);
 
-
-            foreach (Item items in GameData.items)
-            {
-                    //Vector2 origin = new Vector2(items.position.X - 8, items.position.Y - 8);
-                    items.Draw(_spriteBatch, drawBounds, _graphics);
-            }
-
             _spriteBatch.End();
 
+            #endregion
 
             _spriteBatch.Begin();         
                 FPSM.Draw(_spriteBatch, timerFont, new Vector2(25, 30), Color.White);

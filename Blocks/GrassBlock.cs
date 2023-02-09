@@ -10,7 +10,7 @@ namespace NoiseGenProject.Blocks
 {
     internal class GrassBlock : Block
     {
-        public GrassBlock(ContentManager content) : base(content, "Ground")
+        public GrassBlock(ContentManager content)
         {
 
         }

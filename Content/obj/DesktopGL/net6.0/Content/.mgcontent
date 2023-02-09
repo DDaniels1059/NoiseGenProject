@@ -4,6 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Coal.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Ground.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/healthpickup.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Hover.png</File>
@@ -16,6 +17,7 @@
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/timerFont.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -14,20 +14,26 @@ namespace NoiseGenProject.Blocks
     internal class Block
     {
 
-        protected Texture2D Texture { get; set; }
         protected Vector2 Position { get; set; }
-
         public bool isMinable = false;
 
-        public Block(ContentManager content, string path)
+        //public Block(ContentManager content, string path)
+        //{
+        //    if (!isTextureLoaded)
+        //    {
+        //        Texture = content.Load<Texture2D>(path);
+        //        isTextureLoaded = true;
+        //    }
+        //}
+
+        protected virtual Texture2D GetTexture()
         {
-            Texture = content.Load<Texture2D>(path);
+            throw new NotImplementedException();
         }
 
-
-        public void Draw(SpriteBatch _spriteBatch, Vector2 position)
+        public virtual void Draw(SpriteBatch _spriteBatch, Vector2 position)
         {
-            _spriteBatch.Draw(Texture, position, null, Color.White, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.000001f);
+            _spriteBatch.Draw(GetTexture(), position, null, Color.White, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.000001f);
         }
 
 

@@ -13,12 +13,10 @@ namespace NoiseGenProject.Helpers
     {
         public static int TileSize = 32;
         public static int MapSize = 850;
-        public static int CellSize = ((MapSize * TileSize) / 2) + 200;
+        public static int CellSize = ((MapSize * TileSize) / 2) + 200; //Add 200 Pixels To Each Cell For OverLap.
         public static List<Rectangle> collisionObjects = new List<Rectangle>();
         public static Block[,] map = new Block[MapSize, MapSize];
         public static List<Item> items = new List<Item>();
-
-        //Add 200 pixels to each Cell For OverLap.
 
         public static Rectangle TLeftCell = new Rectangle(0, 0, CellSize, CellSize);
         public static Rectangle TRightCell = new Rectangle(CellSize, 0, CellSize, CellSize);
