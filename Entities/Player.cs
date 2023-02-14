@@ -103,13 +103,13 @@ namespace NoiseGenProject
                 anim.setFrame(1);
 
             if (PlayerCollisionBox.Intersects(GameData.TLeftCell))
-                GameData.Curr_Cell = GameData.TLEFT_CELL;
+                GameData.CURR_CELL = GameData.TLEFT_CELL;
             else if (PlayerCollisionBox.Intersects(GameData.TRightCell))
-                GameData.Curr_Cell = GameData.TRIGHT_CELL;
+                GameData.CURR_CELL = GameData.TRIGHT_CELL;
             else if (PlayerCollisionBox.Intersects(GameData.BLeftCell))
-                GameData.Curr_Cell = GameData.BLEFT_CELL;
+                GameData.CURR_CELL = GameData.BLEFT_CELL;
             else if (PlayerCollisionBox.Intersects(GameData.BRightCell))
-                GameData.Curr_Cell = GameData.BRIGHT_CELL;
+                GameData.CURR_CELL = GameData.BRIGHT_CELL;
 
             playerCollisionBox = new Rectangle((int)position.X - 8, (int)position.Y + 4, 16, 16);
             kStateOld = kState;
@@ -118,7 +118,7 @@ namespace NoiseGenProject
 
         public void Draw(SpriteBatch _spriteBatch, Texture2D rectangleTexture, float depth)
         {
-
+        
             anim.Draw(_spriteBatch, depth);
             //_spriteBatch.Draw(rectangleTexture, playerCollisionBox, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.8f);
 

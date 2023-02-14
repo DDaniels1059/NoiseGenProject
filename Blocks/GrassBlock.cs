@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using NoiseGenProject.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace NoiseGenProject.Blocks
 {
     internal class GrassBlock : Block
     {
-        public GrassBlock(ContentManager content)
+        public GrassBlock(ContentManager content) : base(content/*, Game1.miningTexture, 2*/)
         {
 
         }

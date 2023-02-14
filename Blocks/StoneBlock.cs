@@ -17,14 +17,17 @@ namespace NoiseGenProject.Blocks
         private static Texture2D texture;
         private static bool isTextureLoaded = false;
 
-        public StoneBlock(ContentManager content)
+        public StoneBlock(ContentManager content) : base(content/*, Game1.miningTexture, 2*/)
         {
             if (!isTextureLoaded)
             {
                 texture = content.Load<Texture2D>("Stone");
                 isTextureLoaded = true;
             }
+
             isMinable = true;
+            multiplier = 1;
+            timeToMine = 200f;
         }
 
         protected override Texture2D GetTexture()
@@ -35,8 +38,7 @@ namespace NoiseGenProject.Blocks
         public override void DropItem(Vector2 itemPosition, ContentManager Content)
         {
             GameData.items.Add(new Health(itemPosition, Content));
-
-            Debug.WriteLine("Dropped Stone Item");
+            //Debug.WriteLine("Dropped Stone");
         }
     }
 }

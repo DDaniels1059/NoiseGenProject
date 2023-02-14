@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using NoiseGenProject.Blocks;
 using NoiseGenProject.Items;
 using System;
@@ -27,7 +28,7 @@ namespace NoiseGenProject.Helpers
         public const int TRIGHT_CELL = 2;
         public const int BLEFT_CELL = 3;
         public const int BRIGHT_CELL = 4;
-        public static int Curr_Cell = 0;
+        public static int CURR_CELL = 0;
 
         public static List<Rectangle> TLeftCellColl = new List<Rectangle>();
         public static List<Rectangle> TRightCellColl = new List<Rectangle>();

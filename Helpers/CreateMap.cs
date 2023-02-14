@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace NoiseGenProject.Helpers
@@ -49,9 +50,28 @@ namespace NoiseGenProject.Helpers
                 for (int x = 0; x < GameData.MapSize; x++)
                 {
                     float value = noise.GetNoise(x, y);
-                    if (value <= -0.9)
+                    if (value <= -.5)
                     {
-                        GameData.map[x, y] = new CoalBlock(Content);
+                        //Ground Tile && Set Player Initial Position
+                        GameData.map[x, y] = null;
+                        if (!positionSet)
+                        {
+                            player.Position = new Vector2(x * GameData.TileSize + GameData.TileSize / 2, y * GameData.TileSize + 16);
+                            positionSet = true;
+                        }
+                    }                
+                    else if (value > .86 && value <= 1)
+                    {
+                        int rarityChance = rand.Next(1, 900);
+                        if (rarityChance <= 880)
+                        {
+                            GameData.map[x, y] = new CoalBlock(Content);
+                        }
+                        else
+                        {
+                            //This Will be Diamonds
+                            GameData.map[x, y] = new IronBlock(Content);
+                        }
                         Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
 
                         if (rect.Intersects(GameData.TLeftCell))
@@ -71,7 +91,7 @@ namespace NoiseGenProject.Helpers
                             GameData.BRightCellColl.Add(rect);
                         }
                     }
-                    else if (value <= 0.3)
+                    else
                     {
                         GameData.map[x, y] = new StoneBlock(Content);
                         Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
@@ -91,15 +111,6 @@ namespace NoiseGenProject.Helpers
                         else if (rect.Intersects(GameData.BRightCell))
                         {
                             GameData.BRightCellColl.Add(rect);
-                        }                 
-                    }
-                    else
-                    {
-                        GameData.map[x, y] = null;
-                        if (!positionSet)
-                        {
-                            player.Position = new Vector2(x * GameData.TileSize + GameData.TileSize / 2, y * GameData.TileSize + 16);
-                            positionSet = true;
                         }
                     }
                 }

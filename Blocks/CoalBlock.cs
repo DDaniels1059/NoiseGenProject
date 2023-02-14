@@ -3,12 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NoiseGenProject.Helpers;
 using NoiseGenProject.Items;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NoiseGenProject.Blocks
 {
@@ -17,7 +12,7 @@ namespace NoiseGenProject.Blocks
         private static Texture2D texture;
         private static bool isTextureLoaded = false;
 
-        public CoalBlock(ContentManager content)
+        public CoalBlock(ContentManager content) : base(content/*, Game1.miningTexture, 1*/)
         {
             if (!isTextureLoaded)
             {
@@ -25,6 +20,8 @@ namespace NoiseGenProject.Blocks
                 isTextureLoaded = true;
             }
             isMinable = true;
+            multiplier = 2;
+            timeToMine = 400;
         }
 
         protected override Texture2D GetTexture()
@@ -35,8 +32,7 @@ namespace NoiseGenProject.Blocks
         public override void DropItem(Vector2 itemPosition, ContentManager Content)
         {
             GameData.items.Add(new Health(itemPosition, Content));
-
-            Debug.WriteLine("Dropped Coal Item");
+            //Debug.WriteLine("Dropped Coal");
         }
     }
 }

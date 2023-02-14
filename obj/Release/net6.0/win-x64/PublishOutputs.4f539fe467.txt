@@ -1,14 +1,15 @@
 C:\Users\david\Desktop\NoiseGenApp\NoiseGenProject.exe
+C:\Users\david\Desktop\NoiseGenApp\Content/blockMining.xnb
+C:\Users\david\Desktop\NoiseGenApp\Content/Coal.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Ground.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/healthpickup.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Hover.xnb
-C:\Users\david\Desktop\NoiseGenApp\Content/plank.xnb
+C:\Users\david\Desktop\NoiseGenApp\Content/Iron.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Player\walkDown.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Player\walkLeft.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Player\walkRight.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Player\walkUp.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Stone.xnb
-C:\Users\david\Desktop\NoiseGenApp\Content/TextFont.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/timerFont.xnb
 C:\Users\david\Desktop\NoiseGenApp\NoiseGenProject.dll
 C:\Users\david\Desktop\NoiseGenApp\NoiseGenProject.deps.json

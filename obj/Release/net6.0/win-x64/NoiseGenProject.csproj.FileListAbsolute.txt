@@ -1,5 +1,3 @@
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\plank.xnb
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\TextFont.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\NoiseGenProject.exe
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\NoiseGenProject.deps.json
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\NoiseGenProject.runtimeconfig.json
@@ -29,3 +27,6 @@ C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Co
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\timerFont.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\healthpickup.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\Hover.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\Coal.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\blockMining.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\Iron.xnb
