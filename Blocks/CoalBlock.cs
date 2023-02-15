@@ -12,11 +12,11 @@ namespace NoiseGenProject.Blocks
         private static Texture2D texture;
         private static bool isTextureLoaded = false;
 
-        public CoalBlock(ContentManager content) : base(content/*, Game1.miningTexture, 1*/)
+        public CoalBlock(ContentManager content) : base(content)
         {
             if (!isTextureLoaded)
             {
-                texture = content.Load<Texture2D>("Coal");
+                texture = content.Load<Texture2D>("Blocks/Coal");
                 isTextureLoaded = true;
             }
             isMinable = true;

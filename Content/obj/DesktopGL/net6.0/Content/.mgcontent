@@ -4,20 +4,24 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/blockMining.png</File>
-    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Coal.png</File>
-    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Ground.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Blocks/blockMining.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Blocks/Coal.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Blocks/Ground.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Blocks/Iron.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Blocks/Stone.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/healthpickup.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Hover.png</File>
-    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Iron.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkDown.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkLeft.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkRight.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkUp.png</File>
-    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Stone.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Sound/Mine.mp3</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Sound/Pop.mp3</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/timerFont.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

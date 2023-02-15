@@ -16,12 +16,9 @@ namespace NoiseGenProject.Blocks
     internal class Block
     {
 
-        protected Vector2 Position { get; set; }
-        //public static SpriteAnimation anim;
-        private bool isTextureLoaded = false;
+        protected int multiplier = 1;
         public bool isMinable = false;
         public bool isMining = false;
-        protected int multiplier = 1;
         public float elaspedTime = 0;
         public float timeToMine = 0;
 
@@ -63,18 +60,30 @@ namespace NoiseGenProject.Blocks
                 if (elaspedTime <= 50 * multiplier)
                 {
                     Game1.anim.setFrame(0);
+                    if (Sounds.MinePlayed == false)
+                        Sounds.Mine.Play(0.6f, 0f, 0f);
+                    Sounds.MinePlayed = true;
                 }
                 else if (elaspedTime <= 100 * multiplier)
                 {
                     Game1.anim.setFrame(1);
+                    if (Sounds.MinePlayed == true)
+                        Sounds.Mine.Play(0.6f, 0f, 0f);
+                    Sounds.MinePlayed = false;
                 }
                 else if (elaspedTime <= 150 * multiplier)
                 {
                     Game1.anim.setFrame(2);
+                    if (Sounds.MinePlayed == false)
+                        Sounds.Mine.Play(0.6f, 0f, 0f);
+                    Sounds.MinePlayed = true;
                 }
                 else if (elaspedTime <= 200 * multiplier)
                 {
                     Game1.anim.setFrame(3);
+                    if (Sounds.MinePlayed == true)
+                        Sounds.Mine.Play(0.6f, 0f, 0f);
+                    Sounds.MinePlayed = false;
                 }
                 else
                 {

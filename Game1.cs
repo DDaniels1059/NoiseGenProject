@@ -9,12 +9,19 @@ using NoiseGenProject.Helpers;
 using NoiseGenProject.Items;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
+using Microsoft.Xna.Framework.Audio;
 
 namespace NoiseGenProject
 {
 
     enum Dir { Down, Up, Left, Right }
 
+    public static class Sounds
+    {
+        public static SoundEffect Mine;
+        public static SoundEffect Pop;
+        public static bool MinePlayed;
+    }
 
     public class Game1 : Game
     {
@@ -76,11 +83,15 @@ namespace NoiseGenProject
             debugTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
             debugTexture.SetData(new Color[] { Color.White });
 
-            miningTexture = Content.Load<Texture2D>("blockMining");
+            miningTexture = Content.Load<Texture2D>("Blocks/blockMining");
             anim = new SpriteAnimation(miningTexture, 4, 0);
 
             hoverTexture = Content.Load<Texture2D>("Hover");
             timerFont = Content.Load<SpriteFont>("timerFont");
+
+            Sounds.Mine = Content.Load<SoundEffect>("Sound/Mine");
+            Sounds.Pop = Content.Load<SoundEffect>("Sound/Pop");
+
 
             createMap.LoadContent(player, Content);
             player.LoadContent(Content);
@@ -90,9 +101,14 @@ namespace NoiseGenProject
         {
             if (this.IsActive)
             {
-
                 KeyboardState kState = Keyboard.GetState();
-                MouseState mState = Mouse.GetState();               
+                MouseState mState = Mouse.GetState();
+
+
+                if (kState.IsKeyDown(Keys.D3) && kStateOld.IsKeyUp(Keys.D3))
+                {
+                    createMap.CreateNew(player, Content);
+                }
 
                 var initpos = player.Position;
                 player.Update(gameTime, Content);
@@ -205,6 +221,7 @@ namespace NoiseGenProject
                             if (block.elaspedTime >= block.timeToMine)
                             {
                                 GameData.map[x, y] = null;
+                                block.DropItem(itemPosition, Content);
 
                                 if (blockRect.Intersects(GameData.TLeftCell))
                                 {
