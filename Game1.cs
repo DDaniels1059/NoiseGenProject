@@ -152,12 +152,15 @@ namespace NoiseGenProject
                                 currBlock.elaspedTime = 0;
                                 currBlock.isMining = false;
                                 currBlock.Update(gameTime, dt);
+                                Sounds.MinePlayed = false;
                             }
 
                             currBlock = block;
                             block.elaspedTime = 0;
                             block.isMining = false;
                             block.Update(gameTime, dt);
+                            Sounds.MinePlayed = false;
+
                         }
                     }
                 }
