@@ -15,6 +15,7 @@ C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Soun
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Pop.ogg
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Pop.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\timerFont.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\UI\Menu.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\NoiseGenProject.exe
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\NoiseGenProject.deps.json
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\NoiseGenProject.runtimeconfig.json

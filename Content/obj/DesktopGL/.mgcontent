@@ -18,8 +18,10 @@
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Sound/Mine.mp3</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Sound/Pop.mp3</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/timerFont.spritefont</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/UI/Menu.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

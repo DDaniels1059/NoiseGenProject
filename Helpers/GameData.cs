@@ -12,6 +12,9 @@ namespace NoiseGenProject.Helpers
 {
     internal class GameData
     {
+        public static bool isFullscreen = false;
+        public static bool showOptions = false;
+
         public static int TileSize = 32;
         public static int MapSize = 850;
         public static int CellSize = ((MapSize * TileSize) / 2) + 200; //Add 200 Pixels To Each Cell For OverLap.
@@ -34,5 +37,8 @@ namespace NoiseGenProject.Helpers
         public static List<Rectangle> TRightCellColl = new List<Rectangle>();
         public static List<Rectangle> BLeftCellColl = new List<Rectangle>();
         public static List<Rectangle> BRightCellColl = new List<Rectangle>();
+
+
+        public static Rectangle FullScreenButton = new Rectangle(0, 0, 0, 0);
     }
 }

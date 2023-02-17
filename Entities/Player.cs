@@ -71,7 +71,7 @@ namespace NoiseGenProject
                 isMoving = true;
             }
 
-            if (isMoving)
+            if (isMoving && !GameData.showOptions)
             {
                 switch (direction)
                 {

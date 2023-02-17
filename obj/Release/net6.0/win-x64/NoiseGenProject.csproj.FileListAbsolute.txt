@@ -35,3 +35,4 @@ C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Co
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\Sound\Mine.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\Sound\Pop.ogg
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\Sound\Pop.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\win-x64\Content\UI\Menu.xnb

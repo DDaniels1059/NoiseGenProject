@@ -41,3 +41,4 @@ C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\Content\So
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\Content\Sound\Mine.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\Content\Sound\Pop.ogg
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\Content\Sound\Pop.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Release\net6.0\Content\UI\Menu.xnb

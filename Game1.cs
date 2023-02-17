@@ -10,6 +10,7 @@ using NoiseGenProject.Items;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using Microsoft.Xna.Framework.Audio;
+using NoiseGenProject.UI;
 
 namespace NoiseGenProject
 {
@@ -36,12 +37,15 @@ namespace NoiseGenProject
         private Rectangle drawBounds;
         private Rectangle collisionBounds;
 
+        public static Rectangle FullScreenButton;
+
         private Color baseColor;
         private Vector2 mouseHoverPos;
         private float hoverDistance;
 
         public static Texture2D miningTexture;
         public static SpriteAnimation anim;
+        public static Texture2D settingsBackground;
 
         public Camera camera;
         private Player player = new Player();
@@ -50,7 +54,7 @@ namespace NoiseGenProject
         private CreateMap createMap = new CreateMap();
         private Random rand = new Random();
         private Block currBlock = GameData.map[1, 1];
-
+        //private SettingsManager settingsManager = new SettingsManager();
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -81,6 +85,8 @@ namespace NoiseGenProject
             debugTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
             debugTexture.SetData(new Color[] { Color.White });
 
+            settingsBackground = Content.Load<Texture2D>("Blocks/Stone");
+
             miningTexture = Content.Load<Texture2D>("Blocks/blockMining");
             anim = new SpriteAnimation(miningTexture, 4, 0);
 
@@ -90,7 +96,7 @@ namespace NoiseGenProject
             Sounds.Mine = Content.Load<SoundEffect>("Sound/Mine");
             Sounds.Pop = Content.Load<SoundEffect>("Sound/Pop");
 
-
+            //settingsManager.LoadContent(Content);
             createMap.LoadContent(player, Content);
             player.LoadContent(Content);
         }
@@ -102,8 +108,16 @@ namespace NoiseGenProject
                 KeyboardState kState = Keyboard.GetState();
                 MouseState mState = Mouse.GetState();
 
+                //Create New Map
+                if (kState.IsKeyDown(Keys.D3) && kStateOld.IsKeyUp(Keys.D3))
+                {
+                    createMap.CreateNew(player, Content);
+                }
+
                 var initpos = player.Position;
                 float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                player.Update(gameTime, Content);
+                var playerPos = player.Position;
 
                 drawBounds = new Rectangle((int)player.Position.X - 400, (int)player.Position.Y - 400, 800, 800);
                 collisionBounds = new Rectangle((int)player.Position.X - 50, (int)player.Position.Y - 50, 100, 100);
@@ -149,7 +163,7 @@ namespace NoiseGenProject
                     }
                 }
 
-                if (mState.LeftButton == ButtonState.Pressed && hoverDistance < 40)
+                if (mState.LeftButton == ButtonState.Pressed && hoverDistance < 40 && !GameData.showOptions)
                 {
                     // Get the mouse position
                     Vector2 mousePos = help.GetMousePos(mState, camera);
@@ -230,9 +244,20 @@ namespace NoiseGenProject
 
                 #endregion
 
-                //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    //Exit();
+                //Setting Menu Update
+                if (GameData.showOptions)
+                {
+                    //settingsManager.Update(_graphics, Window, mState, mStateOld);
+                }
 
+                //Show Settings Menu
+                if (kState.IsKeyDown(Keys.Escape) && kStateOld.IsKeyUp(Keys.Escape))
+                {
+                    if (GameData.showOptions)
+                        GameData.showOptions = false;
+                    else
+                        GameData.showOptions = true;
+                }
                 //Zoom IN
                 if (kState.IsKeyDown(Keys.D1) && kStateOld.IsKeyUp(Keys.D1))
                 {
@@ -243,38 +268,12 @@ namespace NoiseGenProject
                 {
                     this.camera.Zoom -= 1f;
                 }
-
-                //FullScreen Or Windowed
-                if (kState.IsKeyDown(Keys.Escape) && kStateOld.IsKeyUp(Keys.Escape))
-                {
-                    if (_graphics.PreferredBackBufferWidth == GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)
-                    {
-                        _graphics.PreferredBackBufferWidth = 1280;
-                        _graphics.PreferredBackBufferHeight = 720;
-                        Window.IsBorderless = false;
-                    }
-                    else
-                    {
-                        _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-                        _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-                        Window.IsBorderless = true;
-                    }
-                    _graphics.ApplyChanges();
-                }
-
-                //Create New Map
-                if (kState.IsKeyDown(Keys.D3) && kStateOld.IsKeyUp(Keys.D3))
-                {
-                    createMap.CreateNew(player, Content);
-                }
+                
 
                 kStateOld = kState;
                 mStateOld = mState;
 
                 #endregion
-
-                player.Update(gameTime, Content);
-                var playerPos = player.Position;
 
                 #region COLLISION MANAGEMENT
 
@@ -313,10 +312,12 @@ namespace NoiseGenProject
 
                 #endregion
 
+                #region ITEM UPDATE
                 foreach (Item items in GameData.items)
                 {
                     items.Update(gameTime, player);
                 }
+                #endregion
 
                 GameData.items.RemoveAll(i => i.Collided);
                 this.camera.Position = player.Position;
@@ -329,16 +330,22 @@ namespace NoiseGenProject
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(baseColor);
+            //Viewport viewport = GraphicsDevice.Viewport;         
 
             #region DYNAMIC DISPLAY
 
             _spriteBatch.Begin(this.camera, SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState: SamplerState.PointClamp);
 
+            #region PLAYER
             Vector2 playerOrigin = new Vector2(player.Position.X - 16, player.Position.Y - 1);
             player.Draw(_spriteBatch, debugTexture, help.GetDepth(playerOrigin, _graphics));
+            #endregion
+
 
             createMap.Draw(_spriteBatch, drawBounds);
 
+
+            //Draw Hover Decal On Blocks
             Point mouseTile = new Point((int)(mouseHoverPos.X / GameData.TileSize), (int)(mouseHoverPos.Y / GameData.TileSize));
             if (hoverDistance <= 40)
             {
@@ -395,9 +402,17 @@ namespace NoiseGenProject
 
             #region STATIC DISPLAY
 
-            _spriteBatch.Begin();         
-                FPSM.Draw(_spriteBatch, timerFont, new Vector2(25, 30), Color.White);
-                _spriteBatch.DrawString(timerFont, "Player Pos: " + player.Position.X.ToString() + " " + player.Position.Y.ToString() + "       " + this.camera.Zoom, new Vector2(25, 60), Color.White);
+            _spriteBatch.Begin();
+
+            #region SETTINGS
+            if (GameData.showOptions)
+            {
+               // settingsManager.Draw(_spriteBatch, timerFont, hoverTexture, viewport);
+            }
+            #endregion
+
+            FPSM.Draw(_spriteBatch, timerFont, new Vector2(25, 30), Color.White);
+            _spriteBatch.DrawString(timerFont, "Player Pos: " + player.Position.X.ToString() + " " + player.Position.Y.ToString() + "       " + this.camera.Zoom, new Vector2(25, 60), Color.White);
             _spriteBatch.End();
 
             #endregion
