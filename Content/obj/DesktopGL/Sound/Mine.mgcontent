@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Sound/Mine.mp3</SourceFile>
-  <SourceTime>2023-02-15T09:45:03.7093262-06:00</SourceTime>
+  <SourceTime>2023-02-16T15:21:07.8299126-06:00</SourceTime>
   <DestFile>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/bin/DesktopGL/Sound/Mine.xnb</DestFile>
-  <DestTime>2023-02-15T10:42:52.5351307-06:00</DestTime>
+  <DestTime>2023-02-16T15:21:30.1526357-06:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2022-07-26T06:44:56-05:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

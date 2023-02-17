@@ -1,3 +1,8 @@
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\blockMining.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\Coal.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\Ground.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\Iron.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\Stone.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\healthpickup.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Hover.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Mine.ogg
@@ -5,6 +10,10 @@ C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Play
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Player\walkLeft.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Player\walkRight.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Player\walkUp.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Mine.ogg
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Mine.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Pop.ogg
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Pop.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\timerFont.xnb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\NoiseGenProject.exe
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\NoiseGenProject.deps.json
@@ -32,12 +41,3 @@ C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\obj\Debug\net6.0\refint\Noise
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\obj\Debug\net6.0\NoiseGenProject.pdb
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\obj\Debug\net6.0\NoiseGenProject.genruntimeconfig.cache
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\obj\Debug\net6.0\ref\NoiseGenProject.dll
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\blockMining.xnb
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\Coal.xnb
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\Ground.xnb
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\Iron.xnb
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Blocks\Stone.xnb
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Mine.ogg
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Mine.xnb
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Pop.ogg
-C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\Sound\Pop.xnb

@@ -12,12 +12,7 @@ namespace NoiseGenProject.Items
 
         public override void UseItem(Player player)
         {
-            //if (player.Health < 200)
-            //{
-                Collided = true;
-                //player.Health += 40;
-
-            //}
+            Collided = true;
         }
     }
 }

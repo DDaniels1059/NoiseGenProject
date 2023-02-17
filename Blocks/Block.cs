@@ -16,27 +16,11 @@ namespace NoiseGenProject.Blocks
     internal class Block
     {
 
-        protected int multiplier = 1;
+        public int multiplier = 1;
         public bool isMinable = false;
         public bool isMining = false;
         public float elaspedTime = 0;
-        public float timeToMine = 0;
 
-
-        public Block(ContentManager content)
-        {
-            //if (!isTextureLoaded)
-            //{
-            //    anim = new SpriteAnimation(miningTexture, 4, miningTextureFPS);
-            //    anim.IsLooping = false;
-            //    isTextureLoaded = true;
-            //}
-        }
-
-        protected virtual Texture2D GetTexture()
-        {
-            throw new NotImplementedException();
-        }
 
         public virtual void Draw(SpriteBatch _spriteBatch, Vector2 position)
         {
@@ -47,42 +31,43 @@ namespace NoiseGenProject.Blocks
                 Game1.anim.Position = position;
                 Game1.anim.Draw(_spriteBatch, 0.000002f);
             }
-            else
-            {
-
-            }
         }
 
-        public void Update(GameTime gameTime, float dt)
+        public void Update(float dt)
         {
             if (isMining)
             {
-                if (elaspedTime <= 50 * multiplier)
+                elaspedTime += 100 * dt;
+
+                if (elaspedTime <= 25 * multiplier)
                 {
+                    if (elaspedTime > 1.5)
+                    {
+                        if (Sounds.MinePlayed == false)
+                            Sounds.Mine.Play(0.3f, 0f, 0f);
+                    }
                     Game1.anim.setFrame(0);
+                    Sounds.MinePlayed = true;
+                }
+                else if (elaspedTime <= 50 * multiplier)
+                {
+                    Game1.anim.setFrame(1);
+                    if (Sounds.MinePlayed == true)
+                        Sounds.Mine.Play(0.3f, 0f, 0f);
+                    Sounds.MinePlayed = false;
+                }
+                else if (elaspedTime <= 75 * multiplier)
+                {
+                    Game1.anim.setFrame(2);
                     if (Sounds.MinePlayed == false)
-                        Sounds.Mine.Play(0.6f, 0f, 0f);
+                        Sounds.Mine.Play(0.3f, 0f, 0f);
                     Sounds.MinePlayed = true;
                 }
                 else if (elaspedTime <= 100 * multiplier)
                 {
-                    Game1.anim.setFrame(1);
-                    if (Sounds.MinePlayed == true)
-                        Sounds.Mine.Play(0.6f, 0f, 0f);
-                    Sounds.MinePlayed = false;
-                }
-                else if (elaspedTime <= 150 * multiplier)
-                {
-                    Game1.anim.setFrame(2);
-                    if (Sounds.MinePlayed == false)
-                        Sounds.Mine.Play(0.6f, 0f, 0f);
-                    Sounds.MinePlayed = true;
-                }
-                else if (elaspedTime <= 200 * multiplier)
-                {
                     Game1.anim.setFrame(3);
                     if (Sounds.MinePlayed == true)
-                        Sounds.Mine.Play(0.6f, 0f, 0f);
+                        Sounds.Mine.Play(0.3f, 0f, 0f);
                     Sounds.MinePlayed = false;
                 }
                 else
@@ -92,8 +77,14 @@ namespace NoiseGenProject.Blocks
             }
             else
             {
+                Sounds.MinePlayed = false;
                 elaspedTime = 0;
             }
+        }
+
+        protected virtual Texture2D GetTexture()
+        {
+            throw new NotImplementedException();
         }
 
         public virtual void DropItem(Vector2 itemPosition, ContentManager Content)

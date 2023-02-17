@@ -12,7 +12,7 @@ namespace NoiseGenProject.Blocks
         private static Texture2D texture;
         private static bool isTextureLoaded = false;
 
-        public CoalBlock(ContentManager content) : base(content)
+        public CoalBlock(ContentManager content)
         {
             if (!isTextureLoaded)
             {
@@ -21,18 +21,16 @@ namespace NoiseGenProject.Blocks
             }
             isMinable = true;
             multiplier = 2;
-            timeToMine = 400;
-        }
-
-        protected override Texture2D GetTexture()
-        {
-            return texture;
         }
 
         public override void DropItem(Vector2 itemPosition, ContentManager Content)
         {
+            Sounds.Pop.Play(0.2f, 0f, 0f);
             GameData.items.Add(new Health(itemPosition, Content));
-            //Debug.WriteLine("Dropped Coal");
+        }
+        protected override Texture2D GetTexture()
+        {
+            return texture;
         }
     }
 }

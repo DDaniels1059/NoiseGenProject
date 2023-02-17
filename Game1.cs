@@ -63,11 +63,9 @@ namespace NoiseGenProject
             // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
-            //_graphics.PreferredBackBufferWidth = 1920;
-            //_graphics.PreferredBackBufferHeight = 1080;
             Window.AllowUserResizing = false;
-
             Window.IsBorderless = false;
+            Window.Title = "Mining Project V0.1";
             this.camera = new Camera(_graphics.GraphicsDevice);
             this.camera.Zoom = 2f;    
 
@@ -104,15 +102,7 @@ namespace NoiseGenProject
                 KeyboardState kState = Keyboard.GetState();
                 MouseState mState = Mouse.GetState();
 
-
-                if (kState.IsKeyDown(Keys.D3) && kStateOld.IsKeyUp(Keys.D3))
-                {
-                    createMap.CreateNew(player, Content);
-                }
-
                 var initpos = player.Position;
-                player.Update(gameTime, Content);
-                var playerPos = player.Position;
                 float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 drawBounds = new Rectangle((int)player.Position.X - 400, (int)player.Position.Y - 400, 800, 800);
@@ -124,10 +114,9 @@ namespace NoiseGenProject
 
                 FPSM.Update();
 
-                #region INPUT MANAGEMENT
+                #region INPUT MANAGEMENT              
 
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    Exit();
+                #region MINING/PLACING MANAGMENT
 
                 if (mState.LeftButton == ButtonState.Released)
                 {
@@ -149,18 +138,13 @@ namespace NoiseGenProject
                         {
                             if (currBlock != block && currBlock != null)
                             {
-                                currBlock.elaspedTime = 0;
                                 currBlock.isMining = false;
-                                currBlock.Update(gameTime, dt);
-                                Sounds.MinePlayed = false;
+                                currBlock.Update(dt);
                             }
 
                             currBlock = block;
-                            block.elaspedTime = 0;
                             block.isMining = false;
-                            block.Update(gameTime, dt);
-                            Sounds.MinePlayed = false;
-
+                            block.Update(dt);
                         }
                     }
                 }
@@ -192,17 +176,6 @@ namespace NoiseGenProject
                             itemPosition = new Vector2((x * GameData.TileSize + 16) - offset, (y * GameData.TileSize + 16) - offset);
                         }
 
-                        //if(currBlock != null && !blockRect.Contains((int)mousePos.X, (int)mousePos.Y) && block.isMinable)
-                        //{
-                        //    currBlock.isMining = false;
-                        //    currBlock.elaspedTime = 0;
-                        //}
-
-                        //if (block != null && !block.isMinable)
-                        //{
-                        //    currBlock.isMining = false;
-                        //}
-
                         if (block != null && blockRect.Contains((int)mousePos.X, (int)mousePos.Y) && block.isMinable)
                         {
 
@@ -210,18 +183,17 @@ namespace NoiseGenProject
                             {
                                 if (currBlock != null)
                                 {
-                                    currBlock.elaspedTime = 0;
                                     currBlock.isMining = false;
+                                    currBlock.Update(dt);
                                 }
 
                                 currBlock = block;
                             }
 
                             block.isMining = true;
-                            block.elaspedTime += 100 * dt;
-                            block.Update(gameTime, dt);
+                            block.Update(dt);
 
-                            if (block.elaspedTime >= block.timeToMine)
+                            if (block.elaspedTime >= 100 * block.multiplier)
                             {
                                 GameData.map[x, y] = null;
                                 block.DropItem(itemPosition, Content);
@@ -243,40 +215,66 @@ namespace NoiseGenProject
                                     GameData.BRightCellColl.RemoveAll(c => c.X == x * GameData.TileSize && c.Y == y * GameData.TileSize);
                                 }
                             }
-                            else
-                            {
-                                if (!block.isMining)
-                                {
-                                    block.elaspedTime = 0;
-                                }
-                            }
                         }
                         else
                         {
                             if(currBlock != null)
                             {
                                 currBlock.isMining = false;
-                                currBlock.elaspedTime = 0;
+                                currBlock.Update(dt);
                             }
                             //Debug.WriteLine("Not A Mineable or Valid Block");
                         }                                             
                     }
                 }
 
+                #endregion
+
+                //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    //Exit();
+
+                //Zoom IN
                 if (kState.IsKeyDown(Keys.D1) && kStateOld.IsKeyUp(Keys.D1))
                 {
                     this.camera.Zoom += 1f;
                 }
-
+                //Zoom Out
                 if (kState.IsKeyDown(Keys.D2) && kStateOld.IsKeyUp(Keys.D2))
                 {
                     this.camera.Zoom -= 1f;
+                }
+
+                //FullScreen Or Windowed
+                if (kState.IsKeyDown(Keys.Escape) && kStateOld.IsKeyUp(Keys.Escape))
+                {
+                    if (_graphics.PreferredBackBufferWidth == GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)
+                    {
+                        _graphics.PreferredBackBufferWidth = 1280;
+                        _graphics.PreferredBackBufferHeight = 720;
+                        Window.IsBorderless = false;
+                    }
+                    else
+                    {
+                        _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                        _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                        Window.IsBorderless = true;
+                    }
+                    _graphics.ApplyChanges();
+                }
+
+                //Create New Map
+                if (kState.IsKeyDown(Keys.D3) && kStateOld.IsKeyUp(Keys.D3))
+                {
+                    createMap.CreateNew(player, Content);
                 }
 
                 kStateOld = kState;
                 mStateOld = mState;
 
                 #endregion
+
+                player.Update(gameTime, Content);
+                var playerPos = player.Position;
 
                 #region COLLISION MANAGEMENT
 
@@ -355,18 +353,16 @@ namespace NoiseGenProject
                         currBlock = block;
                     }
 
-
-
                     if (block != null && block.isMinable)
                     {
                         Rectangle blockRect = new Rectangle(mouseTile.X * GameData.TileSize, mouseTile.Y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
                         _spriteBatch.Draw(hoverTexture, blockRect, null, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.00001f);
-                        //Debug.WriteLine(block.elaspedTime);
                     }
                 }
             }
             else
             {
+                //Stops Mining If Character Pulls Mouse Away From HoverDistance
                 if (mouseTile.X >= 0 && mouseTile.X < GameData.MapSize && mouseTile.Y >= 0 && mouseTile.Y < GameData.MapSize)
                 {
                     Block block = GameData.map[mouseTile.X, mouseTile.Y];

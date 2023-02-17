@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using NoiseGenProject.Blocks;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 
 namespace NoiseGenProject.Helpers
 {
@@ -22,102 +23,18 @@ namespace NoiseGenProject.Helpers
                 isTextureLoaded = true;
             }
 
-            noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
-            noise.SetFrequency(0.060f);
-            noise.SetSeed(rand.Next(1, 100000000));
-
-            float[] noiseData = new float[GameData.MapSize * GameData.MapSize];
-            int index = 0;
-
-            for (int y = 0; y < GameData.MapSize; y++)
-            {
-                for (int x = 0; x < GameData.MapSize; x++)
-                {
-                    noiseData[index++] = noise.GetNoise(x, y);
-                }
-            }
-
-            bool positionSet = false;
-
-            for (int y = 0; y < GameData.MapSize; y++)
-            {
-                for (int x = 0; x < GameData.MapSize; x++)
-                {
-                    float value = noise.GetNoise(x, y);
-                    if (value <= -.5)
-                    {
-                        //Ground Tile && Set Player Initial Position
-                        GameData.map[x, y] = null;
-                        if (!positionSet)
-                        {
-                            player.Position = new Vector2(x * GameData.TileSize + GameData.TileSize / 2, y * GameData.TileSize + 16);
-                            positionSet = true;
-                        }
-                    }                
-                    else if (value > .86 && value <= 1)
-                    {
-                        int rarityChance = rand.Next(1, 900);
-                        if (rarityChance <= 880)
-                        {
-                            GameData.map[x, y] = new CoalBlock(Content);
-                        }
-                        else
-                        {
-                            //This Will be Diamonds
-                            GameData.map[x, y] = new IronBlock(Content);
-                        }
-                        Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
-
-                        if (rect.Intersects(GameData.TLeftCell))
-                        {
-                            GameData.TLeftCellColl.Add(rect);
-                        }
-                        else if (rect.Intersects(GameData.TRightCell))
-                        {
-                            GameData.TRightCellColl.Add(rect);
-                        }
-                        else if (rect.Intersects(GameData.BLeftCell))
-                        {
-                            GameData.BLeftCellColl.Add(rect);
-                        }
-                        else if (rect.Intersects(GameData.BRightCell))
-                        {
-                            GameData.BRightCellColl.Add(rect);
-                        }
-                    }
-                    else
-                    {
-                        GameData.map[x, y] = new StoneBlock(Content);
-                        Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
-
-                        if (rect.Intersects(GameData.TLeftCell))
-                        {
-                            GameData.TLeftCellColl.Add(rect);
-                        }
-                        else if (rect.Intersects(GameData.TRightCell))
-                        {
-                            GameData.TRightCellColl.Add(rect);
-                        }
-                        else if (rect.Intersects(GameData.BLeftCell))
-                        {
-                            GameData.BLeftCellColl.Add(rect);
-                        }
-                        else if (rect.Intersects(GameData.BRightCell))
-                        {
-                            GameData.BRightCellColl.Add(rect);
-                        }
-                    }
-                }
-            }
+            NoiseData(player, Content);
         }
 
         public void CreateNew(Player player, ContentManager Content)
         {
-
-            if (!isTextureLoaded)
+            //Set Current Map and Collider to Null/New
+            for (int x = 0; x < GameData.MapSize; x++)
             {
-                ground = Content.Load<Texture2D>("Ground");
-                isTextureLoaded = true;
+                for (int y = 0; y < GameData.MapSize; y++)
+                {
+                    GameData.map[x, y] = null;
+                }
             }
 
             GameData.TLeftCellColl = new List<Rectangle>();
@@ -125,6 +42,11 @@ namespace NoiseGenProject.Helpers
             GameData.BLeftCellColl = new List<Rectangle>();
             GameData.BRightCellColl = new List<Rectangle>();
 
+            NoiseData(player, Content);
+        }
+
+        private void NoiseData(Player player, ContentManager Content)
+        {
             noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             noise.SetFrequency(0.060f);
             noise.SetSeed(rand.Next(1, 100000000));
@@ -153,7 +75,7 @@ namespace NoiseGenProject.Helpers
                         GameData.map[x, y] = null;
                         if (!positionSet)
                         {
-                            player.Position = new Vector2(x * GameData.TileSize + GameData.TileSize / 2, y * GameData.TileSize + 16);
+                            player.Position = new Vector2(x * GameData.TileSize + GameData.TileSize / 2, y * GameData.TileSize + 10);
                             positionSet = true;
                         }
                     }
@@ -169,7 +91,6 @@ namespace NoiseGenProject.Helpers
                             //This Will be Diamonds
                             GameData.map[x, y] = new IronBlock(Content);
                         }
-
                         Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
 
                         if (rect.Intersects(GameData.TLeftCell))
