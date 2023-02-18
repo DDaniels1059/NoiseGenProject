@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Comora;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NoiseGenProject.Blocks;
@@ -136,7 +137,7 @@ namespace NoiseGenProject.Helpers
             }
         }
 
-        public void Draw(SpriteBatch _spriteBatch, Rectangle bounds)
+        public void Draw(SpriteBatch _spriteBatch, Camera camera, Rectangle bounds)
         {
             //What is bounds.Right / bounds.Bottom ?
             int xStart = MathHelper.Max(0, (bounds.X) / GameData.TileSize);
@@ -152,13 +153,17 @@ namespace NoiseGenProject.Helpers
                     Block block = GameData.map[x, y];
                     if (block != null)
                     {
+                        _spriteBatch.Begin(camera, SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp);
                         Vector2 blockPosition = new Vector2(x * GameData.TileSize, y * GameData.TileSize);
                         block.Draw(_spriteBatch, blockPosition);
+                        _spriteBatch.End();
                     }
                     else
                     {
+                        _spriteBatch.Begin(camera, SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp);
                         Vector2 blockPosition = new Vector2(x * GameData.TileSize, y * GameData.TileSize);
                         _spriteBatch.Draw(ground, blockPosition, Color.White);
+                        _spriteBatch.End();
                     }
                 }
             }

@@ -54,7 +54,7 @@ namespace NoiseGenProject
         private CreateMap createMap = new CreateMap();
         private Random rand = new Random();
         private Block currBlock = GameData.map[1, 1];
-        //private SettingsManager settingsManager = new SettingsManager();
+        private SettingsManager settingsManager = new SettingsManager();
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -65,10 +65,11 @@ namespace NoiseGenProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = 1280;
-            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            GameData.isFullscreen = true;
             Window.AllowUserResizing = false;
-            Window.IsBorderless = false;
+            Window.IsBorderless = true;
             Window.Title = "Mining Project V0.1";
             this.camera = new Camera(_graphics.GraphicsDevice);
             this.camera.Zoom = 2f;    
@@ -96,7 +97,7 @@ namespace NoiseGenProject
             Sounds.Mine = Content.Load<SoundEffect>("Sound/Mine");
             Sounds.Pop = Content.Load<SoundEffect>("Sound/Pop");
 
-            //settingsManager.LoadContent(Content);
+            settingsManager.LoadContent(Content);
             createMap.LoadContent(player, Content);
             player.LoadContent(Content);
         }
@@ -119,7 +120,7 @@ namespace NoiseGenProject
                 player.Update(gameTime, Content);
                 var playerPos = player.Position;
 
-                drawBounds = new Rectangle((int)player.Position.X - 400, (int)player.Position.Y - 400, 800, 800);
+                drawBounds = new Rectangle((int)player.Position.X - 500, (int)player.Position.Y - 500, 1000, 1000);
                 collisionBounds = new Rectangle((int)player.Position.X - 50, (int)player.Position.Y - 50, 100, 100);
 
                 mouseHoverPos = help.GetMousePos(mState, camera);
@@ -247,7 +248,7 @@ namespace NoiseGenProject
                 //Setting Menu Update
                 if (GameData.showOptions)
                 {
-                    //settingsManager.Update(_graphics, Window, mState, mStateOld);
+                    settingsManager.Update(_graphics, Window, mState, mStateOld);
                 }
 
                 //Show Settings Menu
@@ -330,9 +331,12 @@ namespace NoiseGenProject
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(baseColor);
-            //Viewport viewport = GraphicsDevice.Viewport;         
+            Viewport viewport = GraphicsDevice.Viewport;
 
             #region DYNAMIC DISPLAY
+
+            createMap.Draw(_spriteBatch, this.camera, drawBounds);
+
 
             _spriteBatch.Begin(this.camera, SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState: SamplerState.PointClamp);
 
@@ -340,10 +344,6 @@ namespace NoiseGenProject
             Vector2 playerOrigin = new Vector2(player.Position.X - 16, player.Position.Y - 1);
             player.Draw(_spriteBatch, debugTexture, help.GetDepth(playerOrigin, _graphics));
             #endregion
-
-
-            createMap.Draw(_spriteBatch, drawBounds);
-
 
             //Draw Hover Decal On Blocks
             Point mouseTile = new Point((int)(mouseHoverPos.X / GameData.TileSize), (int)(mouseHoverPos.Y / GameData.TileSize));
@@ -407,7 +407,7 @@ namespace NoiseGenProject
             #region SETTINGS
             if (GameData.showOptions)
             {
-               // settingsManager.Draw(_spriteBatch, timerFont, hoverTexture, viewport);
+               settingsManager.Draw(_spriteBatch, timerFont, hoverTexture, viewport);
             }
             #endregion
 

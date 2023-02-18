@@ -24,7 +24,7 @@ namespace NoiseGenProject.Blocks
 
         public virtual void Draw(SpriteBatch _spriteBatch, Vector2 position)
         {
-            _spriteBatch.Draw(GetTexture(), position, null, Color.White, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.000001f);
+            _spriteBatch.Draw(GetTexture(), position, null, Color.White, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
             if (isMining)
             {
