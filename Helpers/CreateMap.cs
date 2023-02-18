@@ -25,6 +25,7 @@ namespace NoiseGenProject.Helpers
             }
 
             NoiseData(player, Content);
+
         }
 
         public void CreateNew(Player player, ContentManager Content)
@@ -70,9 +71,37 @@ namespace NoiseGenProject.Helpers
                 for (int x = 0; x < GameData.MapSize; x++)
                 {
                     float value = noise.GetNoise(x, y);
-                    if (value <= -.5)
+                    bool isFirst10Top = (y < 20);
+                    bool isFirst10Left = (x < 20);
+                    bool isFirst10Right = (x >= GameData.MapSize - 20);
+                    bool isFirst10Bottom = (y >= GameData.MapSize - 20);
+
+                    if (isFirst10Top || isFirst10Left || isFirst10Right || isFirst10Bottom)
                     {
-                        //Ground Tile && Set Player Initial Position
+                        GameData.map[x, y] = new StoneBlock(Content);
+                        GameData.map[x, y].isMinable = false;
+                        Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
+
+                        if (rect.Intersects(GameData.TLeftCell))
+                        {
+                            GameData.TLeftCellColl.Add(rect);
+                        }
+                        else if (rect.Intersects(GameData.TRightCell))
+                        {
+                            GameData.TRightCellColl.Add(rect);
+                        }
+                        else if (rect.Intersects(GameData.BLeftCell))
+                        {
+                            GameData.BLeftCellColl.Add(rect);
+                        }
+                        else if (rect.Intersects(GameData.BRightCell))
+                        {
+                            GameData.BRightCellColl.Add(rect);
+                        }
+                    }
+                    else if (value <= -.5)
+                    {
+                        // Ground Tile && Set Player Initial Position
                         GameData.map[x, y] = null;
                         if (!positionSet)
                         {
@@ -137,13 +166,15 @@ namespace NoiseGenProject.Helpers
             }
         }
 
-        public void Draw(SpriteBatch _spriteBatch, Camera camera, Rectangle bounds)
+
+
+        public void Draw(SpriteBatch _spriteBatch, GraphicsDeviceManager _graphics, Camera camera, Rectangle bounds)
         {
             //What is bounds.Right / bounds.Bottom ?
             int xStart = MathHelper.Max(0, (bounds.X) / GameData.TileSize);
             int xEnd = MathHelper.Min(GameData.MapSize, (bounds.Right) / GameData.TileSize + 1);
             int yStart = MathHelper.Max(0, (bounds.Y) / GameData.TileSize);
-            int yEnd = MathHelper.Min(GameData.MapSize, (bounds.Bottom) / GameData.TileSize + 1);
+            int yEnd = MathHelper.Min(GameData.MapSize, (bounds.Bottom) / GameData.TileSize + 1);           
 
             for (int y = yStart; y < yEnd; y++)
             {
@@ -153,14 +184,14 @@ namespace NoiseGenProject.Helpers
                     Block block = GameData.map[x, y];
                     if (block != null)
                     {
-                        _spriteBatch.Begin(camera, SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp);
+                        _spriteBatch.Begin(camera, SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
                         Vector2 blockPosition = new Vector2(x * GameData.TileSize, y * GameData.TileSize);
                         block.Draw(_spriteBatch, blockPosition);
                         _spriteBatch.End();
                     }
                     else
                     {
-                        _spriteBatch.Begin(camera, SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp);
+                        _spriteBatch.Begin(camera, SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
                         Vector2 blockPosition = new Vector2(x * GameData.TileSize, y * GameData.TileSize);
                         _spriteBatch.Draw(ground, blockPosition, Color.White);
                         _spriteBatch.End();

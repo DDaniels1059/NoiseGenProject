@@ -335,7 +335,7 @@ namespace NoiseGenProject
 
             #region DYNAMIC DISPLAY
 
-            createMap.Draw(_spriteBatch, this.camera, drawBounds);
+            createMap.Draw(_spriteBatch, _graphics, this.camera, drawBounds);
 
 
             _spriteBatch.Begin(this.camera, SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState: SamplerState.PointClamp);
