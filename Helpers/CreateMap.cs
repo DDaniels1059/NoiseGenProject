@@ -15,7 +15,7 @@ namespace NoiseGenProject.Helpers
         private static Texture2D ground;
         private static bool isTextureLoaded = false;
         private Random rand = new Random();
-
+        private static bool firstLoad = true;
         public void LoadContent(Player player, ContentManager Content)
         {
             if(!isTextureLoaded) 
@@ -51,7 +51,19 @@ namespace NoiseGenProject.Helpers
         {
             noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             noise.SetFrequency(0.060f);
-            noise.SetSeed(rand.Next(1, 100000000));
+            if (firstLoad)
+            {
+                int randomSeed = rand.Next(1, 999999999);
+                noise.SetSeed(randomSeed);
+                GameData.mapSeed = randomSeed;
+                firstLoad = false;
+            }
+            else
+            {
+                noise.SetSeed(GameData.mapSeed);
+            }            
+
+             
 
             float[] noiseData = new float[GameData.MapSize * GameData.MapSize];
             int index = 0;
@@ -71,12 +83,14 @@ namespace NoiseGenProject.Helpers
                 for (int x = 0; x < GameData.MapSize; x++)
                 {
                     float value = noise.GetNoise(x, y);
-                    bool isFirst10Top = (y < 20);
-                    bool isFirst10Left = (x < 20);
-                    bool isFirst10Right = (x >= GameData.MapSize - 20);
-                    bool isFirst10Bottom = (y >= GameData.MapSize - 20);
 
-                    if (isFirst10Top || isFirst10Left || isFirst10Right || isFirst10Bottom)
+                    //Pad The Maps First 15 blocks on the inward Edges with Stone that is NotMinable to Hide the Edge of the Map
+                    bool isFirst15Top = (y < 15);
+                    bool isFirst15Left = (x < 15);
+                    bool isFirst15Right = (x >= GameData.MapSize - 15);
+                    bool isFirst15Bottom = (y >= GameData.MapSize - 15);
+
+                    if (isFirst15Top || isFirst15Left || isFirst15Right || isFirst15Bottom)
                     {
                         GameData.map[x, y] = new StoneBlock(Content);
                         GameData.map[x, y].isMinable = false;

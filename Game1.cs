@@ -65,11 +65,12 @@ namespace NoiseGenProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            GameData.isFullscreen = true;
+            //_graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            //_graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
             Window.AllowUserResizing = false;
-            Window.IsBorderless = true;
+            Window.IsBorderless = false;
             Window.Title = "Mining Project V0.1";
             this.camera = new Camera(_graphics.GraphicsDevice);
             this.camera.Zoom = 2f;    
@@ -108,15 +109,15 @@ namespace NoiseGenProject
             {
                 KeyboardState kState = Keyboard.GetState();
                 MouseState mState = Mouse.GetState();
+                float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                //Create New Map
-                if (kState.IsKeyDown(Keys.D3) && kStateOld.IsKeyUp(Keys.D3))
+                //Setting Menu Update
+                if (GameData.showOptions)
                 {
-                    createMap.CreateNew(player, Content);
+                    settingsManager.Update(_graphics, Window, dt, Content, createMap, player, mState, mStateOld, kState, kStateOld);
                 }
 
                 var initpos = player.Position;
-                float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 player.Update(gameTime, Content);
                 var playerPos = player.Position;
 
@@ -243,13 +244,7 @@ namespace NoiseGenProject
                     }
                 }
 
-                #endregion
-
-                //Setting Menu Update
-                if (GameData.showOptions)
-                {
-                    settingsManager.Update(_graphics, Window, mState, mStateOld);
-                }
+                #endregion         
 
                 //Show Settings Menu
                 if (kState.IsKeyDown(Keys.Escape) && kStateOld.IsKeyUp(Keys.Escape))
@@ -259,16 +254,16 @@ namespace NoiseGenProject
                     else
                         GameData.showOptions = true;
                 }
-                //Zoom IN
-                if (kState.IsKeyDown(Keys.D1) && kStateOld.IsKeyUp(Keys.D1))
-                {
-                    this.camera.Zoom += 1f;
-                }
-                //Zoom Out
-                if (kState.IsKeyDown(Keys.D2) && kStateOld.IsKeyUp(Keys.D2))
-                {
-                    this.camera.Zoom -= 1f;
-                }
+                ////Zoom IN
+                //if (kState.IsKeyDown(Keys.D1) && kStateOld.IsKeyUp(Keys.D1))
+                //{
+                //    this.camera.Zoom += 1f;
+                //}
+                ////Zoom Out
+                //if (kState.IsKeyDown(Keys.D2) && kStateOld.IsKeyUp(Keys.D2))
+                //{
+                //    this.camera.Zoom -= 1f;
+                //}
                 
 
                 kStateOld = kState;
