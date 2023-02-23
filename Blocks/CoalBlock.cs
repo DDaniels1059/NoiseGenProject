@@ -9,16 +9,9 @@ namespace NoiseGenProject.Blocks
 {
     internal class CoalBlock : Block
     {
-        private static Texture2D texture;
-        private static bool isTextureLoaded = false;
 
-        public CoalBlock(ContentManager content)
+        public CoalBlock() : base(GameData.Textures["Blocks/Coal"])
         {
-            if (!isTextureLoaded)
-            {
-                texture = content.Load<Texture2D>("Blocks/Coal");
-                isTextureLoaded = true;
-            }
             isMinable = true;
             multiplier = 2;
         }
@@ -28,9 +21,6 @@ namespace NoiseGenProject.Blocks
             Sounds.Pop.Play(0.2f, 0f, 0f);
             GameData.items.Add(new Health(itemPosition, Content));
         }
-        protected override Texture2D GetTexture()
-        {
-            return texture;
-        }
+
     }
 }

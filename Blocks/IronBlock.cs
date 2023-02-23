@@ -9,16 +9,8 @@ namespace NoiseGenProject.Blocks
 {
     internal class IronBlock : Block
     {
-        private static Texture2D texture;
-        private static bool isTextureLoaded = false;
-
-        public IronBlock(ContentManager content)
+        public IronBlock() : base(GameData.Textures["Blocks/Iron"])
         {
-            if (!isTextureLoaded)
-            {
-                texture = content.Load<Texture2D>("Blocks/Iron");
-                isTextureLoaded = true;
-            }
             isMinable = true;
             multiplier = 3;
         }
@@ -28,10 +20,5 @@ namespace NoiseGenProject.Blocks
             Sounds.Pop.Play(0.2f, 0f, 0f);
             GameData.items.Add(new Health(itemPosition, Content));
         }
-        protected override Texture2D GetTexture()
-        {
-            return texture;
-        }
-
     }
 }

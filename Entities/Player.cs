@@ -43,7 +43,7 @@ namespace NoiseGenProject
         }
 
         public void Update(GameTime gameTime, ContentManager Content)
-        {
+        {   
             KeyboardState kState = Keyboard.GetState();
             MouseState mState = Mouse.GetState();
 

@@ -45,7 +45,6 @@ namespace NoiseGenProject
 
         public static Texture2D miningTexture;
         public static SpriteAnimation anim;
-        public static Texture2D settingsBackground;
 
         public Camera camera;
         private Player player = new Player();
@@ -73,8 +72,7 @@ namespace NoiseGenProject
             Window.IsBorderless = false;
             Window.Title = "Mining Project V0.1";
             this.camera = new Camera(_graphics.GraphicsDevice);
-            this.camera.Zoom = 2f;    
-
+            this.camera.Zoom = 2f;
             _graphics.ApplyChanges();
             base.Initialize();
         }
@@ -84,10 +82,10 @@ namespace NoiseGenProject
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             baseColor = new Color(89, 86, 82, 255);
 
+            GameData.LoadTextures(Content);
+
             debugTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
             debugTexture.SetData(new Color[] { Color.White });
-
-            settingsBackground = Content.Load<Texture2D>("Blocks/Stone");
 
             miningTexture = Content.Load<Texture2D>("Blocks/blockMining");
             anim = new SpriteAnimation(miningTexture, 4, 0);
@@ -330,7 +328,7 @@ namespace NoiseGenProject
 
             #region DYNAMIC DISPLAY
 
-            createMap.Draw(_spriteBatch, _graphics, this.camera, drawBounds);
+            createMap.Draw(_spriteBatch, this.camera, drawBounds);
 
 
             _spriteBatch.Begin(this.camera, SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState: SamplerState.PointClamp);

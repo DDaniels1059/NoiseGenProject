@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
 using NoiseGenProject.Helpers;
 using System;
 using System.Collections.Generic;
@@ -15,16 +16,25 @@ namespace NoiseGenProject.Blocks
 {
     internal class Block
     {
-
+        [JsonIgnore]
         public int multiplier = 1;
+        [JsonIgnore]
         public bool isMinable = false;
+        [JsonIgnore]
         public bool isMining = false;
+        [JsonIgnore]
         public float elaspedTime = 0;
+        [JsonIgnore]
+        public Texture2D texture;
 
+        public Block(Texture2D texture)
+        {
+            this.texture = texture;
+        }
 
         public virtual void Draw(SpriteBatch _spriteBatch, Vector2 position)
         {
-            _spriteBatch.Draw(GetTexture(), position, null, Color.White, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(texture, position, null, Color.White, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
             if (isMining)
             {
@@ -80,11 +90,6 @@ namespace NoiseGenProject.Blocks
                 Sounds.MinePlayed = false;
                 elaspedTime = 0;
             }
-        }
-
-        protected virtual Texture2D GetTexture()
-        {
-            throw new NotImplementedException();
         }
 
         public virtual void DropItem(Vector2 itemPosition, ContentManager Content)

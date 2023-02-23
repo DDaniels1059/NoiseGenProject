@@ -14,17 +14,8 @@ namespace NoiseGenProject.Blocks
 {
     internal class StoneBlock : Block
     {
-        private static Texture2D texture;
-        private static bool isTextureLoaded = false;
-
-        public StoneBlock(ContentManager Content)
+        public StoneBlock() : base(GameData.Textures["Blocks/Stone"])
         {
-            if (!isTextureLoaded)
-            {
-                texture = Content.Load<Texture2D>("Blocks/Stone");
-                isTextureLoaded = true;
-            }
-
             isMinable = true;
             multiplier = 1;
         }
@@ -32,10 +23,6 @@ namespace NoiseGenProject.Blocks
         {
             Sounds.Pop.Play(0.2f, 0f, 0f);
             GameData.items.Add(new Health(itemPosition, Content));
-        }
-        protected override Texture2D GetTexture()
-        {
-            return texture;
         }
     }
 }

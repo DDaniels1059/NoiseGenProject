@@ -12,23 +12,14 @@ namespace NoiseGenProject.Helpers
     internal class CreateMap
     {
         public static FastNoiseLite noise = new FastNoiseLite();
-        private static Texture2D ground;
-        private static bool isTextureLoaded = false;
         private Random rand = new Random();
         private static bool firstLoad = true;
         public void LoadContent(Player player, ContentManager Content)
         {
-            if(!isTextureLoaded) 
-            {
-                ground = Content.Load<Texture2D>("Blocks/Ground");
-                isTextureLoaded = true;
-            }
-
-            NoiseData(player, Content);
-
+            NoiseData(player);
         }
 
-        public void CreateNew(Player player, ContentManager Content)
+        public void CreateNew(Player player)
         {
             //Set Current Map and Collider to Null/New
             for (int x = 0; x < GameData.MapSize; x++)
@@ -44,10 +35,10 @@ namespace NoiseGenProject.Helpers
             GameData.BLeftCellColl = new List<Rectangle>();
             GameData.BRightCellColl = new List<Rectangle>();
 
-            NoiseData(player, Content);
+            NoiseData(player);
         }
 
-        private void NoiseData(Player player, ContentManager Content)
+        private void NoiseData(Player player)
         {
             noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             noise.SetFrequency(0.060f);
@@ -92,7 +83,7 @@ namespace NoiseGenProject.Helpers
 
                     if (isFirst15Top || isFirst15Left || isFirst15Right || isFirst15Bottom)
                     {
-                        GameData.map[x, y] = new StoneBlock(Content);
+                        GameData.map[x, y] = new StoneBlock();
                         GameData.map[x, y].isMinable = false;
                         Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
 
@@ -128,12 +119,12 @@ namespace NoiseGenProject.Helpers
                         int rarityChance = rand.Next(1, 900);
                         if (rarityChance <= 880)
                         {
-                            GameData.map[x, y] = new CoalBlock(Content);
+                            GameData.map[x, y] = new CoalBlock();
                         }
                         else
                         {
                             //This Will be Diamonds
-                            GameData.map[x, y] = new IronBlock(Content);
+                            GameData.map[x, y] = new IronBlock();
                         }
                         Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
 
@@ -156,7 +147,7 @@ namespace NoiseGenProject.Helpers
                     }
                     else
                     {
-                        GameData.map[x, y] = new StoneBlock(Content);
+                        GameData.map[x, y] = new StoneBlock();
                         Rectangle rect = new Rectangle(x * GameData.TileSize, y * GameData.TileSize, GameData.TileSize, GameData.TileSize);
 
                         if (rect.Intersects(GameData.TLeftCell))
@@ -182,7 +173,7 @@ namespace NoiseGenProject.Helpers
 
 
 
-        public void Draw(SpriteBatch _spriteBatch, GraphicsDeviceManager _graphics, Camera camera, Rectangle bounds)
+        public void Draw(SpriteBatch _spriteBatch, Camera camera, Rectangle bounds)
         {
             //What is bounds.Right / bounds.Bottom ?
             int xStart = MathHelper.Max(0, (bounds.X) / GameData.TileSize);
@@ -207,7 +198,7 @@ namespace NoiseGenProject.Helpers
                     {
                         _spriteBatch.Begin(camera, SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
                         Vector2 blockPosition = new Vector2(x * GameData.TileSize, y * GameData.TileSize);
-                        _spriteBatch.Draw(ground, blockPosition, Color.White);
+                        _spriteBatch.Draw(GameData.Textures["Blocks/Ground"], blockPosition, Color.White);
                         _spriteBatch.End();
                     }
                 }
