@@ -11,10 +11,13 @@
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Blocks/Stone.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/healthpickup.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Hover.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/light.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/light2.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkDown.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkLeft.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkRight.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Player/walkUp.png</File>
+    <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/shadow.png</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Sound/Mine.mp3</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/Sound/Pop.mp3</File>
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/timerFont.spritefont</File>
@@ -22,6 +25,9 @@
     <File>C:/Users/david/Desktop/GitHubRepos/NoiseGenProject/Content/UI/textBox.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

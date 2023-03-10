@@ -306,10 +306,8 @@ namespace NoiseGenProject.UI
                 FullScreenButton = new Rectangle((int)SettingsMenuPosition.X + 64 , (int)SettingsMenuPosition.Y + 64, Button.Width, Button.Height);
                 _spriteBatch.DrawString(timerFont, "FullScreen / Windowed ", new Vector2((int)SettingsMenuPosition.X + 120, (int)SettingsMenuPosition.Y + 64), Color.White, 0f, Vector2.Zero, fontScale, SpriteEffects.None, 1f);
 
-
-
                 //Create Button Draw
-                if(!createMapIsPressed)
+                if (!createMapIsPressed)
                 {
                     _spriteBatch.Draw(Button, SettingsMenuPosition + new Vector2(+64, +114), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0.9f);
                 }
@@ -320,9 +318,8 @@ namespace NoiseGenProject.UI
 
 
                 //Seed TextBox Draw
-                seedTextBox.Draw(_spriteBatch, (int)SettingsMenuPosition.X + 361, (int)SettingsMenuPosition.Y + 111, (int)SettingsMenuPosition.X + 320, (int)SettingsMenuPosition.X + 114);
-                saveNameTextBox.Draw(_spriteBatch, (int)SettingsMenuPosition.X + 661, (int)SettingsMenuPosition.Y + 111, (int)SettingsMenuPosition.X + 575, (int)SettingsMenuPosition.X + 114);
-
+                seedTextBox.Draw(_spriteBatch, (int)SettingsMenuPosition.X + 361, (int)SettingsMenuPosition.Y + 111, (int)SettingsMenuPosition.X + 320, (int)SettingsMenuPosition.Y + 114);
+                saveNameTextBox.Draw(_spriteBatch, (int)SettingsMenuPosition.X + 661, (int)SettingsMenuPosition.Y + 111, (int)SettingsMenuPosition.X + 575, (int)SettingsMenuPosition.Y + 114);
 
 
                 CreateNewMap = new Rectangle((int)SettingsMenuPosition.X + 64, (int)SettingsMenuPosition.Y + 114, Button.Width, Button.Height);

@@ -44,3 +44,6 @@ C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\obj\Debug\net6.0\NoiseGenProj
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\obj\Debug\net6.0\ref\NoiseGenProject.dll
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\UI\textBox.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\shadow.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\light.xnb
+C:\Users\david\Desktop\GitHubRepos\NoiseGenProject\bin\Debug\net6.0\Content\light2.xnb

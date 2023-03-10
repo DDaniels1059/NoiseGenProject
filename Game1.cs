@@ -30,6 +30,11 @@ namespace NoiseGenProject
         private SpriteBatch _spriteBatch;
         private Texture2D debugTexture;
         private Texture2D hoverTexture;
+        private Texture2D shadowTexture;
+        private Texture2D light;
+        private Texture2D light2;
+
+
         private SpriteFont timerFont;
 
         private KeyboardState kStateOld = Keyboard.GetState();
@@ -86,7 +91,10 @@ namespace NoiseGenProject
 
             debugTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
             debugTexture.SetData(new Color[] { Color.White });
+            light = Content.Load<Texture2D>("light");
+            light2 = Content.Load<Texture2D>("light2");
 
+            shadowTexture = Content.Load<Texture2D>("shadow");
             miningTexture = Content.Load<Texture2D>("Blocks/blockMining");
             anim = new SpriteAnimation(miningTexture, 4, 0);
 
@@ -338,6 +346,9 @@ namespace NoiseGenProject
             player.Draw(_spriteBatch, debugTexture, help.GetDepth(playerOrigin, _graphics));
             #endregion
 
+            _spriteBatch.Draw(light, new Vector2(player.Position.X - 32, player.Position.Y - 32), null, Color.White, 0.0f, Vector2.Zero, 2f, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(light2, new Vector2(290, 100), null, Color.White, 0.0f, Vector2.Zero, 2f, SpriteEffects.None, 1f);
+
             //Draw Hover Decal On Blocks
             Point mouseTile = new Point((int)(mouseHoverPos.X / GameData.TileSize), (int)(mouseHoverPos.Y / GameData.TileSize));
             if (hoverDistance <= 40)
@@ -397,12 +408,18 @@ namespace NoiseGenProject
 
             _spriteBatch.Begin();
 
+            ///_spriteBatch.Draw(shadowTexture, new Vector2(0, 0), null, Color.White, 0.0f, Vector2.Zero, 100f, SpriteEffects.None, 0.5f);
+
+
             #region SETTINGS
+
             if (GameData.showOptions)
             {
-               settingsManager.Draw(_spriteBatch, timerFont, hoverTexture, viewport);
+                settingsManager.Draw(_spriteBatch, timerFont, hoverTexture, viewport);
             }
             #endregion
+
+
 
             FPSM.Draw(_spriteBatch, timerFont, new Vector2(25, 30), Color.White);
             _spriteBatch.DrawString(timerFont, "Player Pos: " + player.Position.X.ToString() + " " + player.Position.Y.ToString() + "       " + this.camera.Zoom, new Vector2(25, 60), Color.White);

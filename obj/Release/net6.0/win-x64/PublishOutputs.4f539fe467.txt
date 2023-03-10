@@ -6,11 +6,14 @@ C:\Users\david\Desktop\NoiseGenApp\Content/Blocks\Iron.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Blocks\Stone.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/healthpickup.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Hover.xnb
+C:\Users\david\Desktop\NoiseGenApp\Content/light.xnb
+C:\Users\david\Desktop\NoiseGenApp\Content/light2.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Mine.ogg
 C:\Users\david\Desktop\NoiseGenApp\Content/Player\walkDown.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Player\walkLeft.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Player\walkRight.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Player\walkUp.xnb
+C:\Users\david\Desktop\NoiseGenApp\Content/shadow.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Sound\Mine.ogg
 C:\Users\david\Desktop\NoiseGenApp\Content/Sound\Mine.xnb
 C:\Users\david\Desktop\NoiseGenApp\Content/Sound\Pop.ogg

@@ -18,7 +18,6 @@ namespace NoiseGenProject.Blocks
     {
         [JsonIgnore]
         public int multiplier = 1;
-        [JsonIgnore]
         public bool isMinable = false;
         [JsonIgnore]
         public bool isMining = false;
